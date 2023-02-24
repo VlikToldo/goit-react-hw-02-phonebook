@@ -4,6 +4,8 @@ import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactcForm';
 import ContactFilter from './ContactFilter/ContactFilter';
 import ContactList from './ContactList/ContactList';
+import ContactItem from './ContactItem/ContactItem';
+
 
 import styles from './phonebook.module.css';
 
@@ -62,7 +64,7 @@ class Phonebook extends Component {
     const normalizedNumber = number.toLowerCase();
     const result = contacts.find(({ name, number }) => {
       return (
-        name.toLowerCase() === normalizedName &&
+        name.toLowerCase() === normalizedName ||
         number.toLowerCase() === normalizedNumber
       );
     });
@@ -102,7 +104,9 @@ class Phonebook extends Component {
           <div className={styles.listBox}>
             <ContactFilter handleChange={handleFilter} />
             {isContacts && 
-              <ContactList items={items} removeBook={removeBook} />
+              <ContactList >
+                <ContactItem items={items} removeBook={removeBook}/>
+             </ContactList>
             }
             {!isContacts && 'You dont have a contacts'}
           </div>
